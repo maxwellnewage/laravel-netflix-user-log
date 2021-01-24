@@ -6,15 +6,28 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Serie</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Temporada</th>
+                <th scope="col">Capitulo</th>
                 <th scope="col">Fecha</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($series as $s)
+            @foreach($contentList as $content)
                 <tr>
-                    <td>{{ $s[0] }}</td>
-                    <td>{{ $s[1] }}</td>
+                    <td>{{ $content->type }}</td>
+                    <td>{{ $content->name }}</td>
+
+                    @if($content->type == 'Serie')
+                        <td>{{ $content->seasonNumber }}</td>
+                        <td>{{ $content->seasonTitle }}</td>
+                    @else
+                        <td>No aplica</td>
+                        <td>No aplica</td>
+                    @endif
+                    
+                    <td>{{ $content->date }}</td>
                 </tr>
             @endforeach
         </tbody>
