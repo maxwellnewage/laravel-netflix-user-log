@@ -17,3 +17,4 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::post('result', [HomeController::class, 'load_csv'])->name('csv.result');
+Route::get('episodes_per_day', [HomeController::class, 'getEpisodesPerDay'])->name('episodes.day');

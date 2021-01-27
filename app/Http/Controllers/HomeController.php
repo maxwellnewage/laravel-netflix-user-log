@@ -25,7 +25,10 @@ class HomeController extends Controller
         array_pop($seriesFromCSV);
 
         // Armo un array de objetos para la tabla
-        $contentList = [];
+        $contentList = $contentX = [];
+        $currentDate = '';
+        $contentY = [];
+        $episodesCounter = 0;
 
         foreach($seriesFromCSV as $s) {
             /* 
@@ -50,9 +53,37 @@ class HomeController extends Controller
 
             $content->date = $s[1];
 
+            // lleno la lista de fechas para la Y del chart
+            if($content->date != $currentDate) {
+                $currentDate = $content->date;
+                array_push($contentY, $currentDate);
+                $episodesCounter = 0;
+            }
+
+            $episodesCounter++;
+
+            // lleno la lista de episodios diarios para la X del chart
+            array_push($contentX, $episodesCounter);
+
+            // lleno la lista completa para la tabla
             array_push($contentList, $content);
         }
 
-        return view('result', ['contentList' => $contentList]);
+        // Guardo los valores X-Y en sesion para usarlos en la API
+        session([
+            'contentX' => $contentX,
+            'contentY' => $contentY
+        ]);
+
+        return view('result', [
+            'contentList' => $contentList
+        ]);
+    }
+
+    public function getEpisodesPerDay() {
+        return [
+            'contentX' => session('contentX'),
+            'contentY' => session('contentY')
+        ];
     }
 }

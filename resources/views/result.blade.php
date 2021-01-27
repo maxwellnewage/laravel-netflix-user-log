@@ -40,7 +40,7 @@
 
     <h1>Tus Estadísticas</h1>
     <div class="row">
-        <canvas id="statsChart" width="400" height="400"></canvas>
+        <canvas id="statsChart" width="400" height="100"></canvas>
     </div>
 
 @endsection('content')
