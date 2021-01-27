@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('header')
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+@endsection
+
 @section('content')
 
     <h1>Tus series vistas</h1>
@@ -33,12 +38,17 @@
         </tbody>
     </table>
 
+    <h1>Tus Estadísticas</h1>
+    <div class="row">
+        <canvas id="statsChart" width="400" height="400"></canvas>
+    </div>
+
 @endsection('content')
 
 @section('scripts')
-    <script>
-        $(document).ready(function () {
-            $('#results-table').DataTable();
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
+    <script src="js/datatables.js"></script>
+    <script src="js/charts.js"></script>
 @endsection
