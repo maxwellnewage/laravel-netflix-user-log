@@ -1,6 +1,6 @@
 var ctx = document.getElementById('statsChart').getContext('2d');
 
-var myChart = new chartjs(ctx, {
+var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
