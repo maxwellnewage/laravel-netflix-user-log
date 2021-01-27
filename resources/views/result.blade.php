@@ -2,6 +2,11 @@
 
 @section('header')
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <style>
+        h2 {
+            margin-top: 50px !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -38,7 +43,7 @@
         </tbody>
     </table>
 
-    <h1>Tus Estadísticas</h1>
+    <div id="stats-title"></div>
     <div class="row" id="chart-container"></div>
 
 @endsection('content')

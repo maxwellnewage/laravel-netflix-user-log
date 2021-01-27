@@ -70,6 +70,10 @@ class HomeController extends Controller
             array_push($contentList, $content);
         }
 
+        // Invierto los arrays para que en el grafico se pueda ver desde el primer dia en adelante
+        $contentX = array_reverse($contentX);
+        $contentY = array_reverse($contentY);
+
         // Guardo los valores X-Y en sesion para usarlos en la API
         session([
             'contentX' => $contentX,

@@ -4,6 +4,9 @@ $.get('episodes_per_day', function( data ) {
     // divido el tamaño del array en meses
     let months = Math.floor(data.contentX.length / 30);
 
+    let dateTitleRange = "Tus estadísticas desde el " + data.contentY[0] + " al " + data.contentY[data.contentY.length - 1];
+    $('<h1>' + dateTitleRange + '</h1>').appendTo("#stats-title");
+
     // divido dias y episodios en arrays iguales
     let days = chunkArray(data.contentX, months);
     let episodes = chunkArray(data.contentY, months);
@@ -22,8 +25,10 @@ $.get('episodes_per_day', function( data ) {
 
 function loadChart(days, episodes, id, barColors) {
     var idCanvas = "statsChart_" + id;
+    var dateRange = episodes[0] + " al " + episodes[episodes.length - 1];
 
-    $('<canvas id="' + idCanvas + '" width="400" height="100"></canvas>').appendTo("#chart-container");
+    $('<h2>Rango de Fechas: ' + dateRange + '</h2>').appendTo("#chart-container");
+    $('<canvas id="' + idCanvas + '" width="400" height="150"></canvas>').appendTo("#chart-container");
 
     var ctx = document.getElementById(idCanvas).getContext('2d');
 
@@ -32,7 +37,7 @@ function loadChart(days, episodes, id, barColors) {
         data: {
             labels: episodes,
             datasets: [{
-                label: ' ',
+                label: 'Cantidad de contenido visto',
                 data: days,
                 backgroundColor: barColors,
                 borderWidth: 1
