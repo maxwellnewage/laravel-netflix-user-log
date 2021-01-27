@@ -3,7 +3,7 @@
 
     <h1>Tus series vistas</h1>
 
-    <table class="table table-hover">
+    <table id="results-table" class="display">
         <thead>
             <tr>
                 <th scope="col">Tipo</th>
@@ -34,3 +34,11 @@
     </table>
 
 @endsection('content')
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#results-table').DataTable();
+        });
+    </script>
+@endsection
