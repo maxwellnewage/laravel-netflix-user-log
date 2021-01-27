@@ -39,9 +39,7 @@
     </table>
 
     <h1>Tus Estadísticas</h1>
-    <div class="row">
-        <canvas id="statsChart" width="400" height="100"></canvas>
-    </div>
+    <div class="row" id="chart-container"></div>
 
 @endsection('content')
 

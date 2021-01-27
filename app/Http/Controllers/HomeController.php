@@ -53,17 +53,18 @@ class HomeController extends Controller
 
             $content->date = $s[1];
 
+            $episodesCounter++;
+
             // lleno la lista de fechas para la Y del chart
             if($content->date != $currentDate) {
                 $currentDate = $content->date;
                 array_push($contentY, $currentDate);
+
+                // lleno la lista de episodios diarios para la X del chart
+                array_push($contentX, $episodesCounter);
+
                 $episodesCounter = 0;
             }
-
-            $episodesCounter++;
-
-            // lleno la lista de episodios diarios para la X del chart
-            array_push($contentX, $episodesCounter);
 
             // lleno la lista completa para la tabla
             array_push($contentList, $content);

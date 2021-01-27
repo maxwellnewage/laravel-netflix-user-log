@@ -1,35 +1,40 @@
+var backgroundColors = ["red", "blue", "green", "orange"];
+
 $.get('episodes_per_day', function( data ) {
-    loadChart(data.contentX, data.contentY);
+    // divido el tamaño del array en meses
+    let months = Math.floor(data.contentX.length / 30);
+
+    // divido dias y episodios en arrays iguales
+    let days = chunkArray(data.contentX, months);
+    let episodes = chunkArray(data.contentY, months);
+
+    for(let i = 0; i < days.length; i++) {
+        var barColors = [];
+
+        episodes[i].forEach(element => {
+            var randomColor = Math.floor(Math.random()*16777215).toString(16);
+            barColors.push("#" + randomColor);
+        });
+
+        loadChart(days[i], episodes[i], i, barColors);
+    }
 });
 
-function loadChart(days, amount) {
-    console.log(days);
-    console.log(amount);
-    var ctx = document.getElementById('statsChart').getContext('2d');
-    
-    var myChart = new Chart(ctx, {
+function loadChart(days, episodes, id, barColors) {
+    var idCanvas = "statsChart_" + id;
+
+    $('<canvas id="' + idCanvas + '" width="400" height="100"></canvas>').appendTo("#chart-container");
+
+    var ctx = document.getElementById(idCanvas).getContext('2d');
+
+    new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: amount,
+            labels: episodes,
             datasets: [{
-                label: '# de episodios',
+                label: ' ',
                 data: days,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
+                backgroundColor: barColors,
                 borderWidth: 1
             }]
         },
@@ -43,4 +48,14 @@ function loadChart(days, amount) {
             }
         }
     });
+}
+
+function chunkArray(myArray, chunk_size){
+    var results = [];
+    
+    while (myArray.length) {
+        results.push(myArray.splice(0, chunk_size));
+    }
+    
+    return results;
 }
