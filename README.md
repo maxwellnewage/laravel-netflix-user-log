@@ -29,5 +29,8 @@ En la pantalla de resultados veremos una tabla paginada de nuestras series y pel
 
 Debajo de la tabla, veremos una serie de gráficas separadas en 30 días de visualización; independientes del mes en el cual estemos.
 
+## Casos de prueba
+En la raíz del proyecto armé un archivo (NetflixViewingHistory.csv) que extraje de mi historial de Netflix para que puedan probar.
+
 ## Colaboración y aportes
 Si te interesa mejorar este proyecto, usa el botón Fork arriba a la derecha. Acepto pull request todos los días.
